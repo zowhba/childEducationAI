@@ -1,0 +1,1 @@
+아동의 응답: {{ responses | join(", ") }}

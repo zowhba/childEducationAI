@@ -1,0 +1,2 @@
+이전 학습 세션 ID: {{ lesson_id }}
+아동 ID: {{ child_id }}

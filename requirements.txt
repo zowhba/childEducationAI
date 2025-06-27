@@ -1,0 +1,11 @@
+fastapi
+uvicorn[standard]
+python-dotenv
+openai
+jinja2
+chromadb
+streamlit
+requests
+langchain
+langgraph
+pydantic
