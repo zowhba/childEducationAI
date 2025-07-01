@@ -2,6 +2,7 @@ import openai
 from jinja2 import Environment, FileSystemLoader
 import os
 import uuid
+from dotenv import load_dotenv
 
 
 # Jinja2 템플릿 로더 설정
@@ -11,10 +12,13 @@ env = Environment(loader=FileSystemLoader(template_dir))
 
 class AzureOpenAIService:
     def __init__(self, endpoint, key, dep_curriculum, dep_embed):
+        dotenv_path = os.path.join(os.path.dirname(__file__), '..', '..', '.env')
+        load_dotenv(dotenv_path)
         openai.api_type = "azure"
         openai.api_base = endpoint
         openai.api_version = "2024-05-01-preview"
         openai.api_key = key
+        os.environ["AZURE_OPENAI_API_KEY"] = key
         self.dep_curriculum = dep_curriculum
         self.dep_embed = dep_embed
 
@@ -53,9 +57,15 @@ class AzureOpenAIService:
                 {"role": "user",   "content": prompt}
             ]
         )
-        parts = resp.choices[0].message.content.strip().split("---")
-        lesson = parts[0]
-        materials = parts[1:]
+        content = resp.choices[0].message.content.strip()
+        
+        # 문제와 정답을 분리
+        parts = content.split("---정답---")
+        lesson = parts[0].strip()  # 지문과 문제
+        answers = parts[1].strip() if len(parts) > 1 else ""  # 정답
+        
+        # materials에는 정답만 포함 (피드백용)
+        materials = [answers] if answers else []
         return lesson, materials
 
     def save_lesson(self, child_id, lesson_text, docs):
@@ -64,10 +74,9 @@ class AzureOpenAIService:
         # TODO: 필요 시 저장 로직 추가
         return lesson_id
 
-    def create_feedback(self, responses):
-        """이해도 평가 결과를 기반으로 피드백 생성"""
+    def create_feedback(self, materials_text, responses_text):
         tmpl = env.get_template("feedback.txt")
-        prompt = tmpl.render(responses=responses)
+        prompt = tmpl.render(materials_text=materials_text, responses_text=responses_text)
         resp = openai.chat.completions.create(
             model=self.dep_curriculum,
             messages=[
@@ -77,10 +86,10 @@ class AzureOpenAIService:
         )
         return resp.choices[0].message.content.strip()
 
-    def generate_next_material(self, child_id, lesson_id):
+    def generate_next_material(self, child_id, lesson_id, last_responses=None):
         """이전 학습 반영하여 다음 교재 생성"""
         tmpl = env.get_template("next_material.txt")
-        prompt = tmpl.render(child_id=child_id, lesson_id=lesson_id)
+        prompt = tmpl.render(child_id=child_id, lesson_id=lesson_id, last_responses=last_responses)
         resp = openai.chat.completions.create(
             model=self.dep_curriculum,
             messages=[
@@ -88,4 +97,4 @@ class AzureOpenAIService:
                 {"role": "user",   "content": prompt}
             ]
         )
-        return resp.choices[0].message.content.strip()
+        return resp.choices[0].message.content.strip() 

@@ -1,23 +1,41 @@
 from langgraph.graph import StateGraph, START, END
 from app.workflow.nodes import (
-    profile_node,
+    init_profile_node,
     fetch_course_node,
-    generate_node,
-    assess_node,
-    feedback_node
+    generate_materials_node,
+    submit_assessment_node,
+    create_feedback_node
 )
-from app.models.schemas import ChildProfileInput
+from app.models.schemas import EducationWorkflowState
 
-def create_graph() -> StateGraph:
-    graph = StateGraph(state_schema=ChildProfileInput)
-    graph.add_node(START, profile_node)
+def create_init_profile_graph() -> StateGraph:
+    """초기 프로필 기반 교재 생성 워크플로우"""
+    graph = StateGraph(state_schema=EducationWorkflowState)
+    
+    # 노드 추가
+    graph.add_node("init_profile", init_profile_node)
     graph.add_node("fetch_course", fetch_course_node)
-    graph.add_node("generate", generate_node)
-    graph.add_node("assess", assess_node)
-    graph.add_node("feedback", feedback_node)
-    graph.add_edge(START, "fetch_course")
-    graph.add_edge("fetch_course", "generate")
-    graph.add_edge("generate", "assess")
-    graph.add_edge("assess", "feedback")
-    graph.add_edge("feedback", END)
+    graph.add_node("generate_materials", generate_materials_node)
+    
+    # 엣지 연결
+    graph.add_edge(START, "init_profile")
+    graph.add_edge("init_profile", "fetch_course")
+    graph.add_edge("fetch_course", "generate_materials")
+    graph.add_edge("generate_materials", END)
+    
+    return graph.compile()
+
+def create_assessment_graph() -> StateGraph:
+    """평가 제출 및 피드백 생성 워크플로우"""
+    graph = StateGraph(state_schema=EducationWorkflowState)
+    
+    # 노드 추가
+    graph.add_node("submit_assessment", submit_assessment_node)
+    graph.add_node("create_feedback", create_feedback_node)
+    
+    # 엣지 연결
+    graph.add_edge(START, "submit_assessment")
+    graph.add_edge("submit_assessment", "create_feedback")
+    graph.add_edge("create_feedback", END)
+    
     return graph.compile()
