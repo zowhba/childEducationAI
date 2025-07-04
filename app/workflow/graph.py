@@ -4,7 +4,8 @@ from app.workflow.nodes import (
     fetch_course_node,
     generate_materials_node,
     submit_assessment_node,
-    create_feedback_node
+    create_feedback_node,
+    create_overall_feedback_node
 )
 from app.models.schemas import EducationWorkflowState
 
@@ -38,4 +39,12 @@ def create_assessment_graph() -> StateGraph:
     graph.add_edge("submit_assessment", "create_feedback")
     graph.add_edge("create_feedback", END)
     
+    return graph.compile()
+
+def create_overall_feedback_graph() -> StateGraph:
+    """학습 이력 기반 종합 피드백 워크플로우"""
+    graph = StateGraph(state_schema=EducationWorkflowState)
+    graph.add_node("create_overall_feedback", create_overall_feedback_node)
+    graph.add_edge(START, "create_overall_feedback")
+    graph.add_edge("create_overall_feedback", END)
     return graph.compile()

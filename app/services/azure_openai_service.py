@@ -97,4 +97,20 @@ class AzureOpenAIService:
                 {"role": "user",   "content": prompt}
             ]
         )
+        return resp.choices[0].message.content.strip()
+
+    def create_overall_feedback(self, name, age, history):
+        """
+        학습 이력 전체를 받아 종합 피드백을 LLM으로 생성
+        history: [{interests, topic, feedback}, ...]
+        """
+        tmpl = env.get_template("feedback_summary.txt")
+        prompt = tmpl.render(name=name, age=age, history=history)
+        resp = openai.chat.completions.create(
+            model=self.dep_curriculum,
+            messages=[
+                {"role": "system", "content": "종합 피드백 생성 AI"},
+                {"role": "user",   "content": prompt}
+            ]
+        )
         return resp.choices[0].message.content.strip() 

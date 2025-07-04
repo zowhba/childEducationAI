@@ -23,6 +23,19 @@ class FeedbackResponse(BaseModel):
     feedback: str           = Field(..., description="이해도 평가 기반 피드백")
     next_lesson: Optional[str] = Field(None, description="다음 교재 내용(옵션)")
 
+class OverallFeedbackResponse(BaseModel):
+    feedback: str = Field(..., description="학습 이력 기반 종합 피드백")
+
+class FeedbackHistoryItem(BaseModel):
+    interests: str
+    topic: str
+    feedback: str
+
+class OverallFeedbackRequest(BaseModel):
+    name: str
+    age: int
+    history: List[FeedbackHistoryItem]
+
 # LangGraph 워크플로우용 통합 상태
 @dataclass
 class EducationWorkflowState:
@@ -44,3 +57,5 @@ class EducationWorkflowState:
     # 결과
     learning_response: Optional[LearningResponse] = None
     feedback_response: Optional[FeedbackResponse] = None
+    overall_feedback_response: Optional[OverallFeedbackResponse] = None
+    history: Optional[List[Dict[str, str]]] = None

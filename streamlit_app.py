@@ -7,6 +7,7 @@ import sqlite3
 from datetime import datetime
 import re
 from collections import Counter
+import json
 
 # 환경변수 로드
 load_dotenv()
@@ -147,6 +148,22 @@ def get_unused_categories(user_interests):
                 used_cats.add(cat)
     unused = [cat for cat in CATEGORIES if cat not in used_cats]
     return unused
+
+def get_history_for_feedback(history):
+    result = []
+    for item in history:
+        # title에서 관심사 추출
+        m = re.findall(r'\((.*?)\)', item['title'])
+        interests = m[0] if m else ""
+        # content에서 주제 추출
+        topic = item['content'].split('\n')[0][:30] if item['content'] else ""
+        feedback = item.get('feedback', '') or ""  # None/null을 빈 문자열로 보정
+        result.append({
+            "interests": interests,
+            "topic": topic,
+            "feedback": feedback
+        })
+    return result
 
 def render_overall_feedback(history):
     # 관심사, 학습 주제, 피드백 요약 추출
@@ -323,15 +340,6 @@ if not st.session_state.logged_in:
 else:
     acc = get_account(st.session_state.child_id)
     with st.sidebar:
-        st.markdown(f"### {acc['name']}님의 학습 이력")
-        history = get_history(acc["id"])
-        if history:
-            for idx, item in enumerate(history):
-                if st.button(f"{item['date']} {item['title']}", key=f"lesson_{idx}"):
-                    st.session_state.selected_lesson = item
-        else:
-            st.info("아직 학습 이력이 없습니다.")
-        st.markdown("---")
         st.markdown("#### 새 교재 생성")
         interests = st.text_input("관심사 입력", key="interest_input")
         if st.button("교재 생성", key="create_lesson_btn"):
@@ -360,6 +368,13 @@ else:
                 st.success("✅ 교재가 생성되었습니다! 메인 화면에서 확인하세요.")
             else:
                 st.error(f"오류 발생: {resp.text}")
+        st.markdown("---")
+        st.markdown(f"### {acc['name']}님의 학습 이력")
+        history = get_history(acc["id"])
+        if history:
+            for idx, item in enumerate(history):
+                if st.button(f"{item['date']} {item['title']}", key=f"lesson_{idx}"):
+                    st.session_state.selected_lesson = item
 
     # 메인: 학습 상세/진행
     if st.session_state.selected_lesson:
@@ -382,6 +397,7 @@ else:
                 "materials_text": lesson["materials_text"]
             }
             try:
+                print(json.dumps(payload, ensure_ascii=False))
                 resp = requests.post(urljoin(API_URL, "/submit_assessment"), json=payload)
                 if resp.status_code == 200:
                     data = resp.json()
@@ -398,7 +414,21 @@ else:
             st.write(st.session_state.feedback or lesson.get("feedback"))
     else:
         if history:
-            st.markdown(render_overall_feedback(history), unsafe_allow_html=True)
+            history_for_feedback = get_history_for_feedback(history)
+            payload = {
+                "name": acc["name"],
+                "age": acc["age"],
+                "history": history_for_feedback
+            }
+            st.spinner("AI 종합 피드백을 작성중입니다. 잠시만 기다려주세요...")
+            resp = requests.post(urljoin(API_URL, "/overall_feedback"), json=payload)
+            if resp.status_code == 200:
+                overall_feedback = resp.json().get("feedback", "")
+                st.markdown("---")
+                st.markdown("## 📊 AI 종합 피드백")
+                st.markdown(overall_feedback, unsafe_allow_html=True)
+            else:
+                st.error("AI 종합 피드백 생성에 실패했습니다.")
         else:
             st.markdown("""
             # 👋 처음 오셨군요!

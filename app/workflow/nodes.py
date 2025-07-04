@@ -7,7 +7,7 @@ load_dotenv(dotenv_path)
 import uuid
 from app.services.azure_openai_service import AzureOpenAIService
 from app.services.vector_db_service import VectorDBService
-from app.models.schemas import EducationWorkflowState, LearningResponse, FeedbackResponse
+from app.models.schemas import EducationWorkflowState, LearningResponse, FeedbackResponse, OverallFeedbackResponse
 
 key = os.getenv("AZURE_OPENAI_API_KEY")
 if not key:
@@ -79,4 +79,17 @@ def create_feedback_node(state: EducationWorkflowState) -> EducationWorkflowStat
         state.feedback_response = FeedbackResponse(
             feedback=feedback
         )
+    return state
+
+def create_overall_feedback_node(state: EducationWorkflowState) -> EducationWorkflowState:
+    """학습 이력 기반 종합 피드백 생성"""
+    # 필요한 정보: 이름, 나이, 이력 리스트(history)
+    if state.child_profile and hasattr(state, 'history') and state.history:
+        # history: [{interests, topic, feedback}, ...] 형태로 가정
+        feedback = azure_service.create_overall_feedback(
+            name=state.child_profile.name,
+            age=state.child_profile.age,
+            history=state.history
+        )
+        state.overall_feedback_response = OverallFeedbackResponse(feedback=feedback)
     return state
