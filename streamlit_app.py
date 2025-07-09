@@ -92,37 +92,38 @@ def render_child_friendly_materials(materials_text):
     output = []
     q_num = 1
     in_choices = False
-    for line in lines:
-        # 문제 번호 감지
-        m = re.match(r'【문제 (\d+)】', line)
-        if m:
-            num = int(m.group(1))
-            emoji = ['🎈', '🐻', '🦄', '🦊', '🐧'][min(num-1, 4)]
-            output.append(f"\n---\n\n#### {emoji} 문제 {num}\n")
-            q_num = num
-            in_choices = False
-            continue
-        # 객관식 보기는 ①~④
-        m = re.match(r'\s*([①②③④])', line)
-        if m:
-            color_emoji = {'①': '🔵', '②': '🟢', '③': '🟡', '④': '🟣'}
-            emoji = color_emoji.get(m.group(1), '⚪')
-            output.append(f"{emoji} {line.strip()}\n")
-            in_choices = True
-            continue
-        # 정답 입력란
-        if '답안:' in line or '정답:' in line:
-            if in_choices:
-                output.append("\n✏️ **정답:** (     )\n")
-            elif '단답형' in materials_text or q_num == 4:
-                output.append("\n✏️ **정답:** _______________\n")
-            elif '서술형' in materials_text or q_num == 5:
-                output.append("\n✏️ **정답:**\n____________________________\n____________________________\n____________________________\n")
-            in_choices = False
-            continue
+        # for line in lines:
+        # # 문제 번호 감지
+        # m = re.match(r'【문제 (\d+)】', line)
+        # if m:
+        #     num = int(m.group(1))
+        #     emoji = ['🎈', '🐻', '🦄', '🦊', '🐧'][min(num-1, 4)]
+        #     output.append(f"\n---\n\n#### {emoji} 문제 {num}\n")
+        #     q_num = num
+        #     in_choices = False
+        #     continue
+        # # 객관식 보기는 ①~④
+        # m = re.match(r'\s*([①②③④])', line)
+        # if m:
+        #     color_emoji = {'①': '🔵', '②': '🟢', '③': '🟡', '④': '🟣'}
+        #     emoji = color_emoji.get(m.group(1), '⚪')
+        #     output.append(f"{emoji} {line.strip()}\n")
+        #     in_choices = True
+        #     continue
+        # # 정답 입력란
+        # if '답안:' in line or '정답:' in line:
+        #     if in_choices:
+        #         output.append("\n✏️ **정답:** (     )\n")
+        #     elif '단답형' in materials_text or q_num == 4:
+        #         output.append("\n✏️ **정답:** _______________\n")
+        #     elif '서술형' in materials_text or q_num == 5:
+        #         output.append("\n✏️ **정답:**\n____________________________\n____________________________\n____________________________\n")
+        #     in_choices = False
+        #     continue
+        # */
         # 일반 텍스트(문제 설명 등)
-        if line.strip():
-            output.append(f"{line.strip()}\n")
+        # if line.strip():
+            # output.append(f"{line.strip()}\n")
     output.append("\n---\n")
     return ''.join(output)
 
@@ -381,37 +382,42 @@ else:
         lesson = st.session_state.selected_lesson
         st.markdown(f"### {lesson['title']}")
         st.write(lesson['content'])
-        st.markdown("#### 문제지 🎉")
+        # st.markdown("#### 문제지 ")
         st.markdown(render_child_friendly_materials(lesson['materials_text']), unsafe_allow_html=True)
-        st.markdown("#### 문제 답변 입력")
-        answer_inputs = []
-        for i in range(5):
-            answer = st.text_input(f"{i+1}번 문제 정답", key=f"answer_{i+1}", placeholder=f"{i+1}번 문제 정답 :")
-            answer_inputs.append(answer)
-        if st.button("문제 제출", key="submit_assessment_btn"):
-            responses_text = "\n".join(answer_inputs)
-            payload = {
-                "child_id": acc["id"],
-                "lesson_id": lesson["lesson_id"],
-                "responses_text": responses_text,
-                "materials_text": lesson["materials_text"]
-            }
-            try:
-                print(json.dumps(payload, ensure_ascii=False))
-                resp = requests.post(urljoin(API_URL, "/submit_assessment"), json=payload)
-                if resp.status_code == 200:
-                    data = resp.json()
-                    st.session_state.feedback = data["feedback"]
-                    update_feedback(acc["id"], lesson["lesson_id"], data["feedback"])
-                    st.success("✅ 평가가 제출되었습니다! 피드백을 확인하세요.")
-                else:
-                    st.error(f"오류 발생: {resp.text}")
-            except Exception as e:
-                st.error(f"요청 중 오류 발생: {e}")
-        # 피드백은 문제 제출 후에만 노출
-        if (lesson.get("feedback") or st.session_state.feedback) and any(ans.strip() for ans in answer_inputs):
+        # 히스토리에서 선택한 완료된 학습은 답변 입력/제출 UI를 숨기고 피드백만 표시
+        if lesson.get('feedback'):
             st.markdown("#### 피드백 결과")
-            st.write(st.session_state.feedback or lesson.get("feedback"))
+            st.write(lesson['feedback'])
+        else:
+            st.markdown("#### 문제 답변 입력")
+            answer_inputs = []
+            for i in range(5):
+                answer = st.text_input(f"{i+1}번 문제 정답", key=f"answer_{i+1}", placeholder=f"{i+1}번 문제 정답 :")
+                answer_inputs.append(answer)
+            if st.button("문제 제출", key="submit_assessment_btn"):
+                responses_text = "\n".join(answer_inputs)
+                payload = {
+                    "child_id": acc["id"],
+                    "lesson_id": lesson["lesson_id"],
+                    "responses_text": responses_text,
+                    "materials_text": lesson["materials_text"]
+                }
+                try:
+                    print(json.dumps(payload, ensure_ascii=False))
+                    resp = requests.post(urljoin(API_URL, "/submit_assessment"), json=payload)
+                    if resp.status_code == 200:
+                        data = resp.json()
+                        st.session_state.feedback = data["feedback"]
+                        update_feedback(acc["id"], lesson["lesson_id"], data["feedback"])
+                        st.success("✅ 평가가 제출되었습니다! 피드백을 확인하세요.")
+                    else:
+                        st.error(f"오류 발생: {resp.text}")
+                except Exception as e:
+                    st.error(f"요청 중 오류 발생: {e}")
+            # 피드백은 문제 제출 후에만 노출
+            if (lesson.get("feedback") or st.session_state.feedback) and any(ans.strip() for ans in answer_inputs):
+                st.markdown("#### 피드백 결과")
+                st.write(st.session_state.feedback or lesson.get("feedback"))
     else:
         if history:
             history_for_feedback = get_history_for_feedback(history)
