@@ -1,2 +1,4 @@
 .env
-.env
+etc/auto_grafana_extract.py
+etc/grafanaCapture.py
+etc/grafanaTest.py
