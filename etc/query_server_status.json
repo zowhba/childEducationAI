@@ -1,0 +1,49 @@
+{
+  "queries": [
+    {
+      "alias": "",
+      "bucketAggs": [
+        {
+          "field": "host_name.keyword",
+          "id": "3",
+          "settings": {
+            "min_doc_count": "1",
+            "order": "desc",
+            "orderBy": "1",
+            "size": "0"
+          },
+          "type": "terms"
+        },
+        {
+          "field": "@timestamp",
+          "id": "2",
+          "settings": {
+            "interval": "5m",
+            "min_doc_count": "0",
+            "timeZone": "utc",
+            "trimEdges": "0"
+          },
+          "type": "date_histogram"
+        }
+      ],
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "Ek9UdOUVk"
+      },
+      "metrics": [
+        {
+          "id": "1",
+          "type": "count"
+        }
+      ],
+      "query": "if_batch_id.keyword: IF\\-EDMP.UPDATE.API\\-003",
+      "refId": "A",
+      "timeField": "@timestamp",
+      "datasourceId": 4,
+      "intervalMs": 120000,
+      "maxDataPoints": 687
+    }
+  ],
+  "from": "1752130051680",
+  "to": "1752216451680"
+}

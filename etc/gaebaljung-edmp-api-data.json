@@ -1,0 +1,114 @@
+{
+  "에러 응답 코드 현황 (IF-EDMP.UPDATE.API-001)": {
+    "results": {
+      "A": {
+        "status": 200
+      }
+    }
+  },
+  "응답코드현황 (최근 1h) (IF-EDMP.UPDATE.API-001)": {
+    "results": {
+      "A": {
+        "status": 200
+      }
+    }
+  },
+  "셋탑 모델별 현황 (IF-EDMP.UPDATE.API-001)": {
+    "results": {
+      "A": {
+        "status": 200
+      }
+    }
+  },
+  "응답 서버 현황 (IF-EDMP.UPDATE.API-001)": {
+    "results": {
+      "A": {
+        "status": 200
+      }
+    }
+  },
+  "에러 응답 코드 현황 (IF-EDMP.UPDATE.API-002)": {
+    "results": {
+      "A": {
+        "status": 200
+      }
+    }
+  },
+  "응답코드현황 (최근 1h) (IF-EDMP.UPDATE.API-002)": {
+    "results": {
+      "A": {
+        "status": 200
+      }
+    }
+  },
+  "셋탑 모델별 현황 (IF-EDMP.UPDATE.API-002)": {
+    "results": {
+      "A": {
+        "status": 200
+      }
+    }
+  },
+  "응답 서버 현황 (IF-EDMP.UPDATE.API-002)": {
+    "results": {
+      "A": {
+        "status": 200
+      }
+    }
+  },
+  "에러 응답 코드 현황 (IF-EDMP.UPDATE.API-003)": {
+    "results": {
+      "A": {
+        "status": 200
+      }
+    }
+  },
+  "응답코드현황 (최근 1h) (IF-EDMP.UPDATE.API-003)": {
+    "results": {
+      "A": {
+        "status": 200
+      }
+    }
+  },
+  "셋탑 모델별 현황 (IF-EDMP.UPDATE.API-003)": {
+    "results": {
+      "A": {
+        "status": 200
+      }
+    }
+  },
+  "응답 서버 현황 (IF-EDMP.UPDATE.API-003)": {
+    "results": {
+      "A": {
+        "status": 200
+      }
+    }
+  },
+  "에러 응답 코드 현황 (IF-EDMP.UPDATE.API-005)": {
+    "results": {
+      "A": {
+        "status": 200
+      }
+    }
+  },
+  "응답코드현황 (최근 1h) (IF-EDMP.UPDATE.API-005)": {
+    "results": {
+      "A": {
+        "status": 200
+      }
+    }
+  },
+  "셋탑 모델별 현황 (IF-EDMP.UPDATE.API-005)": {
+    "results": {
+      "A": {
+        "status": 200
+      }
+    }
+  },
+  "응답 서버 현황 (IF-EDMP.UPDATE.API-005)": {
+    "results": {
+      "A": {
+        "status": 200
+      }
+    }
+  }
+}

@@ -3,13 +3,13 @@ from jinja2 import Environment, FileSystemLoader
 import os
 import uuid
 from dotenv import load_dotenv
-from langfuse import Langfuse
+# from langfuse import Langfuse, Trace  # langfuse 관련 import 제거
 
-langfuse = Langfuse(
-    public_key="pk-lf-0aac3129-100a-4e8f-bac7-7d66539e16ae",
-    secret_key="sk-lf-f12705b9-29ae-4533-a55d-e7831edb36ae",
-    host="https://us.cloud.langfuse.com"  # 또는 클라우드 주소
-)
+# langfuse = Langfuse(
+#     public_key="pk-lf-0aac3129-100a-4e8f-bac7-7d66539e16ae",
+#     secret_key="sk-lf-f12705b9-29ae-4533-a55d-e7831edb36ae",
+#     host="https://us.cloud.langfuse.com"  # 또는 클라우드 주소
+# )
 
 # Jinja2 템플릿 로더 설정
 template_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'prompts')
@@ -85,15 +85,16 @@ class AzureOpenAIService:
         tmpl = env.get_template("feedback.txt")
         prompt = tmpl.render(materials_text=materials_text, responses_text=responses_text)
         
-        # Langfuse trace 시작
-        trace = langfuse.trace(
-            name="create_feedback",
-            user_id="some_user_id"  # 필요시 아동 ID 등
-        )
-        span = trace.span(
-            name="openai-feedback-call",
-            input=prompt
-        )
+        # Langfuse trace 시작 (임시 주석 처리)
+        # trace = Trace(
+        #     name="create_feedback",
+        #     user_id="some_user_id",  # 필요시 아동 ID 등
+        #     langfuse=langfuse
+        # )
+        # span = trace.span(
+        #     name="openai-feedback-call",
+        #     input=prompt
+        # )
         resp = openai.chat.completions.create(
             model=self.dep_curriculum,
             messages=[
@@ -103,8 +104,8 @@ class AzureOpenAIService:
         )
         output = resp.choices[0].message.content.strip()
         print("[Langfuse Output]", repr(output))  # 값이 정확히 뭔지 확인
-        span.output = str(output)  # 혹시 모르니 str로 변환
-        span.end()
+        # span.output = str(output)  # 혹시 모르니 str로 변환
+        # span.end()
         return output
 
     def create_overall_feedback(self, name, age, history):
@@ -112,15 +113,16 @@ class AzureOpenAIService:
         tmpl = env.get_template("feedback_summary.txt")
         prompt = tmpl.render(name=name, age=age, history=history)
 
-        # Langfuse trace 시작
-        trace = langfuse.trace(
-            name="create_overall_feedback",
-            user_id=name  # 필요시 child_id 등으로 변경
-        )
-        span = trace.span(
-            name="openai-overall-feedback-call",
-            input=prompt
-        )
+        # Langfuse trace 시작 (임시 주석 처리)
+        # trace = Trace(
+        #     name="create_overall_feedback",
+        #     user_id=name,  # 필요시 child_id 등으로 변경
+        #     langfuse=langfuse
+        # )
+        # span = trace.span(
+        #     name="openai-overall-feedback-call",
+        #     input=prompt
+        # )
         resp = openai.chat.completions.create(
             model=self.dep_curriculum,
             messages=[
@@ -129,8 +131,8 @@ class AzureOpenAIService:
             ]
         )
         output = resp.choices[0].message.content.strip()
-        span.output = output
-        span.end()
+        # span.output = output
+        # span.end()
         return output
 
     def generate_next_material(self, child_id, lesson_id, last_responses=None):

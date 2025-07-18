@@ -1,0 +1,614 @@
+{
+  "RTN_SUCCESS": [
+    {
+      "timestamp": 1752127200000,
+      "value": 324604
+    },
+    {
+      "timestamp": 1752130800000,
+      "value": 1234850
+    },
+    {
+      "timestamp": 1752134400000,
+      "value": 1390976
+    },
+    {
+      "timestamp": 1752138000000,
+      "value": 1632776
+    },
+    {
+      "timestamp": 1752141600000,
+      "value": 1687946
+    },
+    {
+      "timestamp": 1752145200000,
+      "value": 1745095
+    },
+    {
+      "timestamp": 1752148800000,
+      "value": 1740112
+    },
+    {
+      "timestamp": 1752152400000,
+      "value": 1733423
+    },
+    {
+      "timestamp": 1752156000000,
+      "value": 1421750
+    },
+    {
+      "timestamp": 1752159600000,
+      "value": 1066690
+    },
+    {
+      "timestamp": 1752163200000,
+      "value": 708237
+    },
+    {
+      "timestamp": 1752166800000,
+      "value": 629316
+    },
+    {
+      "timestamp": 1752170400000,
+      "value": 528438
+    },
+    {
+      "timestamp": 1752174000000,
+      "value": 615821
+    },
+    {
+      "timestamp": 1752177600000,
+      "value": 849340
+    },
+    {
+      "timestamp": 1752181200000,
+      "value": 1202355
+    },
+    {
+      "timestamp": 1752184800000,
+      "value": 1474561
+    },
+    {
+      "timestamp": 1752188400000,
+      "value": 1473876
+    },
+    {
+      "timestamp": 1752192000000,
+      "value": 1126810
+    },
+    {
+      "timestamp": 1752195600000,
+      "value": 1015791
+    },
+    {
+      "timestamp": 1752199200000,
+      "value": 991426
+    },
+    {
+      "timestamp": 1752202800000,
+      "value": 1047640
+    },
+    {
+      "timestamp": 1752206400000,
+      "value": 1085500
+    },
+    {
+      "timestamp": 1752210000000,
+      "value": 1142803
+    },
+    {
+      "timestamp": 1752213600000,
+      "value": 792181
+    }
+  ],
+  "RTN_STB_VER_ERR": [
+    {
+      "timestamp": 1752127200000,
+      "value": 147
+    },
+    {
+      "timestamp": 1752130800000,
+      "value": 552
+    },
+    {
+      "timestamp": 1752134400000,
+      "value": 562
+    },
+    {
+      "timestamp": 1752138000000,
+      "value": 594
+    },
+    {
+      "timestamp": 1752141600000,
+      "value": 635
+    },
+    {
+      "timestamp": 1752145200000,
+      "value": 628
+    },
+    {
+      "timestamp": 1752148800000,
+      "value": 602
+    },
+    {
+      "timestamp": 1752152400000,
+      "value": 606
+    },
+    {
+      "timestamp": 1752156000000,
+      "value": 538
+    },
+    {
+      "timestamp": 1752159600000,
+      "value": 503
+    },
+    {
+      "timestamp": 1752163200000,
+      "value": 475
+    },
+    {
+      "timestamp": 1752166800000,
+      "value": 467
+    },
+    {
+      "timestamp": 1752170400000,
+      "value": 470
+    },
+    {
+      "timestamp": 1752174000000,
+      "value": 489
+    },
+    {
+      "timestamp": 1752177600000,
+      "value": 504
+    },
+    {
+      "timestamp": 1752181200000,
+      "value": 566
+    },
+    {
+      "timestamp": 1752184800000,
+      "value": 595
+    },
+    {
+      "timestamp": 1752188400000,
+      "value": 561
+    },
+    {
+      "timestamp": 1752192000000,
+      "value": 611
+    },
+    {
+      "timestamp": 1752195600000,
+      "value": 586
+    },
+    {
+      "timestamp": 1752199200000,
+      "value": 569
+    },
+    {
+      "timestamp": 1752202800000,
+      "value": 563
+    },
+    {
+      "timestamp": 1752206400000,
+      "value": 582
+    },
+    {
+      "timestamp": 1752210000000,
+      "value": 572
+    },
+    {
+      "timestamp": 1752213600000,
+      "value": 414
+    }
+  ],
+  "RTN_STB_ID_ERR": [
+    {
+      "timestamp": 1752127200000,
+      "value": 43
+    },
+    {
+      "timestamp": 1752130800000,
+      "value": 178
+    },
+    {
+      "timestamp": 1752134400000,
+      "value": 154
+    },
+    {
+      "timestamp": 1752138000000,
+      "value": 150
+    },
+    {
+      "timestamp": 1752141600000,
+      "value": 155
+    },
+    {
+      "timestamp": 1752145200000,
+      "value": 262
+    },
+    {
+      "timestamp": 1752148800000,
+      "value": 149
+    },
+    {
+      "timestamp": 1752152400000,
+      "value": 180
+    },
+    {
+      "timestamp": 1752156000000,
+      "value": 149
+    },
+    {
+      "timestamp": 1752159600000,
+      "value": 157
+    },
+    {
+      "timestamp": 1752163200000,
+      "value": 152
+    },
+    {
+      "timestamp": 1752166800000,
+      "value": 250
+    },
+    {
+      "timestamp": 1752170400000,
+      "value": 141
+    },
+    {
+      "timestamp": 1752174000000,
+      "value": 180
+    },
+    {
+      "timestamp": 1752177600000,
+      "value": 166
+    },
+    {
+      "timestamp": 1752181200000,
+      "value": 171
+    },
+    {
+      "timestamp": 1752184800000,
+      "value": 157
+    },
+    {
+      "timestamp": 1752188400000,
+      "value": 261
+    },
+    {
+      "timestamp": 1752192000000,
+      "value": 160
+    },
+    {
+      "timestamp": 1752195600000,
+      "value": 194
+    },
+    {
+      "timestamp": 1752199200000,
+      "value": 159
+    },
+    {
+      "timestamp": 1752202800000,
+      "value": 170
+    },
+    {
+      "timestamp": 1752206400000,
+      "value": 159
+    },
+    {
+      "timestamp": 1752210000000,
+      "value": 250
+    },
+    {
+      "timestamp": 1752213600000,
+      "value": 108
+    }
+  ],
+  "RTN_PDU_ERR": [
+    {
+      "timestamp": 1752127200000,
+      "value": 936
+    },
+    {
+      "timestamp": 1752130800000,
+      "value": 3957
+    },
+    {
+      "timestamp": 1752134400000,
+      "value": 3374
+    },
+    {
+      "timestamp": 1752138000000,
+      "value": 2547
+    },
+    {
+      "timestamp": 1752141600000,
+      "value": 3121
+    },
+    {
+      "timestamp": 1752145200000,
+      "value": 2760
+    },
+    {
+      "timestamp": 1752148800000,
+      "value": 2933
+    },
+    {
+      "timestamp": 1752152400000,
+      "value": 4005
+    },
+    {
+      "timestamp": 1752156000000,
+      "value": 3361
+    },
+    {
+      "timestamp": 1752159600000,
+      "value": 2640
+    },
+    {
+      "timestamp": 1752163200000,
+      "value": 3075
+    },
+    {
+      "timestamp": 1752166800000,
+      "value": 2748
+    },
+    {
+      "timestamp": 1752170400000,
+      "value": 2728
+    },
+    {
+      "timestamp": 1752174000000,
+      "value": 3871
+    },
+    {
+      "timestamp": 1752177600000,
+      "value": 3203
+    },
+    {
+      "timestamp": 1752181200000,
+      "value": 2526
+    },
+    {
+      "timestamp": 1752184800000,
+      "value": 2975
+    },
+    {
+      "timestamp": 1752188400000,
+      "value": 2611
+    },
+    {
+      "timestamp": 1752192000000,
+      "value": 2655
+    },
+    {
+      "timestamp": 1752195600000,
+      "value": 3784
+    },
+    {
+      "timestamp": 1752199200000,
+      "value": 3189
+    },
+    {
+      "timestamp": 1752202800000,
+      "value": 2531
+    },
+    {
+      "timestamp": 1752206400000,
+      "value": 3086
+    },
+    {
+      "timestamp": 1752210000000,
+      "value": 2770
+    },
+    {
+      "timestamp": 1752213600000,
+      "value": 2020
+    }
+  ],
+  "RTN_MAC_ERR": [
+    {
+      "timestamp": 1752127200000,
+      "value": 56
+    },
+    {
+      "timestamp": 1752130800000,
+      "value": 157
+    },
+    {
+      "timestamp": 1752134400000,
+      "value": 205
+    },
+    {
+      "timestamp": 1752138000000,
+      "value": 197
+    },
+    {
+      "timestamp": 1752141600000,
+      "value": 185
+    },
+    {
+      "timestamp": 1752145200000,
+      "value": 205
+    },
+    {
+      "timestamp": 1752148800000,
+      "value": 233
+    },
+    {
+      "timestamp": 1752152400000,
+      "value": 199
+    },
+    {
+      "timestamp": 1752156000000,
+      "value": 199
+    },
+    {
+      "timestamp": 1752159600000,
+      "value": 135
+    },
+    {
+      "timestamp": 1752163200000,
+      "value": 97
+    },
+    {
+      "timestamp": 1752166800000,
+      "value": 104
+    },
+    {
+      "timestamp": 1752170400000,
+      "value": 111
+    },
+    {
+      "timestamp": 1752174000000,
+      "value": 112
+    },
+    {
+      "timestamp": 1752177600000,
+      "value": 189
+    },
+    {
+      "timestamp": 1752181200000,
+      "value": 122
+    },
+    {
+      "timestamp": 1752184800000,
+      "value": 184
+    },
+    {
+      "timestamp": 1752188400000,
+      "value": 185
+    },
+    {
+      "timestamp": 1752192000000,
+      "value": 233
+    },
+    {
+      "timestamp": 1752195600000,
+      "value": 144
+    },
+    {
+      "timestamp": 1752199200000,
+      "value": 173
+    },
+    {
+      "timestamp": 1752202800000,
+      "value": 136
+    },
+    {
+      "timestamp": 1752206400000,
+      "value": 138
+    },
+    {
+      "timestamp": 1752210000000,
+      "value": 210
+    },
+    {
+      "timestamp": 1752213600000,
+      "value": 133
+    }
+  ],
+  "RTN_DEVICE_MODEL_ERR": [
+    {
+      "timestamp": 1752127200000,
+      "value": 89
+    },
+    {
+      "timestamp": 1752130800000,
+      "value": 299
+    },
+    {
+      "timestamp": 1752134400000,
+      "value": 372
+    },
+    {
+      "timestamp": 1752138000000,
+      "value": 426
+    },
+    {
+      "timestamp": 1752141600000,
+      "value": 369
+    },
+    {
+      "timestamp": 1752145200000,
+      "value": 413
+    },
+    {
+      "timestamp": 1752148800000,
+      "value": 438
+    },
+    {
+      "timestamp": 1752152400000,
+      "value": 466
+    },
+    {
+      "timestamp": 1752156000000,
+      "value": 335
+    },
+    {
+      "timestamp": 1752159600000,
+      "value": 220
+    },
+    {
+      "timestamp": 1752163200000,
+      "value": 182
+    },
+    {
+      "timestamp": 1752166800000,
+      "value": 137
+    },
+    {
+      "timestamp": 1752170400000,
+      "value": 169
+    },
+    {
+      "timestamp": 1752174000000,
+      "value": 207
+    },
+    {
+      "timestamp": 1752177600000,
+      "value": 272
+    },
+    {
+      "timestamp": 1752181200000,
+      "value": 276
+    },
+    {
+      "timestamp": 1752184800000,
+      "value": 322
+    },
+    {
+      "timestamp": 1752188400000,
+      "value": 257
+    },
+    {
+      "timestamp": 1752192000000,
+      "value": 330
+    },
+    {
+      "timestamp": 1752195600000,
+      "value": 360
+    },
+    {
+      "timestamp": 1752199200000,
+      "value": 347
+    },
+    {
+      "timestamp": 1752202800000,
+      "value": 344
+    },
+    {
+      "timestamp": 1752206400000,
+      "value": 278
+    },
+    {
+      "timestamp": 1752210000000,
+      "value": 246
+    },
+    {
+      "timestamp": 1752213600000,
+      "value": 209
+    }
+  ]
+}

@@ -33,7 +33,7 @@ class  langfuseTest:
         self.dep_embed = dep_embed
 
     def newsTopicTest(self):
-        tmpl = env.get_template("newsTopicTest.txt")
+        tmpl = env.get_template("prompts/newsTopicTest.txt")
         prompt = tmpl.render("korea")
         
         # Langfuse trace 시작
